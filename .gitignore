@@ -15,19 +15,3 @@
 .idea
 *.iws
 *.iml
-*.ipr
-
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-.DS_Store
-ytx-sso/.DS_Store
-ytx-sso/logs/
-
-### add by zhangbaisong
-**/logs/
-**/out/

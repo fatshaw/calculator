@@ -11,9 +11,15 @@ repositories {
 
 
 dependencies {
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.22'
 
     testCompile(
             "junit:junit:4.12"
     )
+}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.fatshaw.learning.calculator.CalculatorApp'
+    }
 }
