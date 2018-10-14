@@ -8,7 +8,12 @@ public class CalculatorCommandParser {
         return String.format("operator %s (position: %d): insufficient parameters\n%s", operator, pos, stackMessage);
     }
 
-    public String parse(String line) throws InsufficientParameterException {
+    /**
+     *
+     * @param line input string
+     * @return calculate result
+     */
+    public String parse(String line){
         if (line == null || line.length() == 0) {
             return calculator.toString();
         }

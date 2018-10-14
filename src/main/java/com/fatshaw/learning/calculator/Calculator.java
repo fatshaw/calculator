@@ -49,16 +49,21 @@ public class Calculator {
     @Override
     public String toString() {
         return String.format("stack: %s",
-            stack.stream().map(i -> displayNumber(i)
-            ).collect(Collectors.joining(" ")));
+            stack.stream().map(i -> displayNumber(i)).collect(Collectors.joining(" ")));
     }
 
-
+    /**
+     * add number to the top of stack
+     * @param number
+     */
     public void addNumber(BigDecimal number) {
         addNumberWithScale(number);
         lastOperations.push(new Operation(null, number));
     }
 
+    /**
+     * undo last operation
+     */
     public void undo() {
         if (lastOperations.size() > 0) {
             Operation operation = lastOperations.pop();
@@ -71,6 +76,9 @@ public class Calculator {
         }
     }
 
+    /**
+     * clear the stack
+     */
     public void clear() {
         List<BigDecimal> numbers = new ArrayList<>();
         while (stack.size() > 0) {
