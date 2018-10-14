@@ -6,5 +6,5 @@
 new BigDecimal("1.2").setScale(15,RoundingMode.FLOOR)
 
 * run app
-./gradlew build
+./gradlew build  
 java -jar build/libs/cacluator-1.0-SNAPSHOT.jar   
