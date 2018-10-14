@@ -2,16 +2,7 @@
 /build/
 /logs/
 /out
-/gradle
-!gradle/wrapper/gradle-wrapper.jar
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
+/gradle/**
 
 ### IntelliJ IDEA ###
 .idea

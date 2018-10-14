@@ -2,7 +2,7 @@ package com.fatshaw.learning.calculator;
 
 public class CalculatorCommandParser {
 
-    Calculator calculator = new Calculator();
+    private Calculator calculator = new Calculator();
 
     public String getMessage(String operator, int pos, String stackMessage) {
         return String.format("operator %s (position: %d): insufficient parameters\n%s", operator, pos, stackMessage);
