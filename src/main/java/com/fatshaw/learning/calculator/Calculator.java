@@ -54,7 +54,6 @@ public class Calculator {
 
     /**
      * add number to the top of stack
-     * @param number
      */
     public void addNumber(BigDecimal number) {
         addNumberWithScale(number);
@@ -95,22 +94,27 @@ public class Calculator {
         if (operator == null) {
             return;
         }
-        List<BigDecimal> numbers = new ArrayList<>();
+
         int needParameterNumber = operator.needParameterNumber();
-        BigDecimal result;
-        if (stack.size() >= needParameterNumber) {
-            for (int i = 0; i < needParameterNumber; i++) {
-                numbers.add(stack.pop());
-            }
-            result = operator.operate(numbers);
-            addNumberWithScale(result);
-        } else {
+        if (stack.size() < needParameterNumber) {
             throw new InsufficientParameterException(toString());
         }
 
-        Collections.reverse(numbers);
-        lastOperations.add(new Operation(numbers, result));
-    }
+        List<BigDecimal> numbers = new ArrayList<>();
+        for (int i = 0; i < needParameterNumber; i++) {
+            numbers.add(stack.pop());
+        }
 
+        try {
+            BigDecimal result = operator.operate(numbers);
+            addNumberWithScale(result);
+            Collections.reverse(numbers);
+            lastOperations.add(new Operation(numbers, result));
+        } catch (ArithmeticException e) {
+            for (int i = needParameterNumber - 1; i >= 0; i--) {
+                stack.push(numbers.get(i));
+            }
+        }
+    }
 
 }
