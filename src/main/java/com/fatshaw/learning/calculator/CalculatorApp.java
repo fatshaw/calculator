@@ -7,10 +7,10 @@ public class CalculatorApp {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        CalculatorCommandParser calculatorCommandParser = new CalculatorCommandParser();
+        CalculatorCommandInvoker calculatorCommandInvoker = new CalculatorCommandInvoker();
 
         while (true) {
-            String result = calculatorCommandParser.parse(scanner.nextLine());
+            String result = calculatorCommandInvoker.parse(scanner.nextLine());
             System.out.println(result);
         }
     }

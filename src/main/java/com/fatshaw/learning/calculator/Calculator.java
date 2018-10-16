@@ -105,7 +105,7 @@ public class Calculator {
             result = operator.operate(numbers);
             addNumberWithScale(result);
         } else {
-            throw new InsufficientParameterException();
+            throw new InsufficientParameterException(toString());
         }
 
         Collections.reverse(numbers);

@@ -1,38 +1,35 @@
 package com.fatshaw.learning.calculator;
 
-public class CalculatorCommandParser {
+public class CalculatorCommandInvoker {
 
-    private Calculator calculator = new Calculator();
+    CalculatorCommander calculatorCommander = new CalculatorCommander();
 
     public String getMessage(String operator, int pos, String stackMessage) {
         return String.format("operator %s (position: %d): insufficient parameters\n%s", operator, pos, stackMessage);
     }
 
     /**
-     *
      * @param line input string
      * @return calculate result
      */
-    public String parse(String line){
+    public String parse(String line) {
         if (line == null || line.length() == 0) {
-            return calculator.toString();
+            return "";
         }
 
         String[] words = line.split(" ");
         int pos = 1;
         for (int i = 0; i < words.length; i++) {
             try {
-                CalculatorConsumer biConsumer = CalculatorControlCommander.create(words[i]);
-                biConsumer.accept(calculator, words[i]);
+                CalculatorCommand command = calculatorCommander.create(words[i]);
+                command.exec();
             } catch (InsufficientParameterException e) {
-                return getMessage(words[i], pos, calculator.toString());
+                return getMessage(words[i], pos, e.getMessage());
             }
 
             pos += words[i].length() + 1;
         }
 
-        return calculator.toString();
+        return calculatorCommander.printCalculator().exec();
     }
-
-
 }
