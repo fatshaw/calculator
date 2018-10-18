@@ -19,6 +19,12 @@ public class CalculatorAppTest {
     }
 
     @Test
+    public void input_5_500_divide_should_return_stack_100() {
+        CalculatorApp calculatorApp = new CalculatorApp();
+        assertEquals("stack: 100", calculatorApp.processLine("5 500 /"));
+    }
+
+    @Test
     public void input_0_1_divide_should_return_stack_0_1() {
         CalculatorApp calculatorApp = new CalculatorApp();
         assertEquals("stack: 0 1", calculatorApp.processLine("0 1 /"));

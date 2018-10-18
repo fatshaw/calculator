@@ -41,7 +41,7 @@ public class CalculatorApp {
 
     public String processLine(String line) {
 
-        String[] tokens = line.split(" ");
+        String[] tokens = line.trim().split(" ");
         int pos = 1;
         CommandResult commandResult = null;
 

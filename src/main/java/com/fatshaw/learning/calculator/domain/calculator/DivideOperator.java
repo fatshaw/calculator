@@ -4,6 +4,7 @@ import com.fatshaw.learning.calculator.domain.transaction.Transaction;
 import com.fatshaw.learning.calculator.domain.transaction.TransactionContext;
 import com.fatshaw.learning.calculator.exception.InsufficientParameterException;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class DivideOperator extends CalculatorOperator {
         BigDecimal a = calculatorContext.pop();
         BigDecimal b = calculatorContext.pop();
         try {
-            BigDecimal result = a.divide(b);
+            BigDecimal result = a.divide(b, MathContext.DECIMAL64);
             calculatorContext.push(result);
 
             return Optional.of(Transaction.<BigDecimal>builder().
