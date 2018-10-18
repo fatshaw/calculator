@@ -1,31 +1,39 @@
 package com.fatshaw.learning.calculator.command;
 
-import com.fatshaw.learning.calculator.domain.TransactionCommand;
-import java.math.BigDecimal;
+import com.fatshaw.learning.calculator.domain.calculator.AddOperator;
+import com.fatshaw.learning.calculator.domain.calculator.CalculatorOperator;
+import com.fatshaw.learning.calculator.domain.calculator.ClearOperator;
+import com.fatshaw.learning.calculator.domain.calculator.DivideOperator;
+import com.fatshaw.learning.calculator.domain.calculator.MultiplyOperator;
+import com.fatshaw.learning.calculator.domain.calculator.PushNumberOperator;
+import com.fatshaw.learning.calculator.domain.calculator.SqrtOperator;
+import com.fatshaw.learning.calculator.domain.calculator.SubtractOperator;
+import com.fatshaw.learning.calculator.domain.calculator.UndoOperator;
 
 public class CalculatorCommandHandlerFactory {
 
-
-    private static boolean isNumber(String word) {
-        try {
-            new BigDecimal(word);
-        } catch (NumberFormatException e) {
-            return false;
+    private static CalculatorOperator state(String token) {
+        switch (token) {
+            case "+":
+                return new AddOperator();
+            case "-":
+                return new SubtractOperator();
+            case "*":
+                return new MultiplyOperator();
+            case "/":
+                return new DivideOperator();
+            case "sqrt":
+                return new SqrtOperator();
+            case "undo":
+                return new UndoOperator();
+            case "clear":
+                return new ClearOperator();
         }
-        return true;
+        return new PushNumberOperator(token);
     }
 
     public static CalculatorCommandHandler create(TransactionCommand transactionCommand) {
-        if (isNumber(transactionCommand.getToken())) {
-            return new PushCalculatorCommandHandler();
-        }
-        switch (transactionCommand.getToken()) {
-            case "undo":
-                return new UndoCalculatorCommandHandler();
-            case "clear":
-                return new ClearCalculatorCommandHandler();
-        }
-        return new MathCalculatorCommandHandler();
+        return command -> command.getCalculator().apply(state(transactionCommand.getToken()));
     }
 
 }

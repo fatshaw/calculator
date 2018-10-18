@@ -1,11 +1,9 @@
 package com.fatshaw.learning.calculator;
 
-import com.fatshaw.learning.calculator.command.CalculatorCommandHandler;
-import com.fatshaw.learning.calculator.command.CalculatorCommandHandlerFactory;
+import com.fatshaw.learning.calculator.command.TransactionCommand;
 import com.fatshaw.learning.calculator.command.TransactionCommandExecutor;
-import com.fatshaw.learning.calculator.domain.Calculator;
-import com.fatshaw.learning.calculator.domain.TransactionCommand;
-import com.fatshaw.learning.calculator.domain.TransactionResult;
+import com.fatshaw.learning.calculator.domain.calculator.Calculator;
+import com.fatshaw.learning.calculator.command.CommandResult;
 import com.fatshaw.learning.calculator.exception.InsufficientParameterException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -24,16 +22,14 @@ public class CalculatorApp {
     private String displayNumber(BigDecimal i) {
         String plain = i.toPlainString();
         int numberOfTrailingZero = 0;
-        int scale = i.scale();
         for (int k = plain.length() - 1; k > plain.indexOf('.'); k--) {
-            if (plain.charAt(k) == '0') {
-                numberOfTrailingZero++;
-            } else {
+            if (plain.charAt(k) != '0') {
                 break;
             }
+            numberOfTrailingZero++;
         }
         return new BigDecimal(plain)
-            .setScale(Math.min(scale - numberOfTrailingZero, DISPLAY_SCALE), RoundingMode.FLOOR)
+            .setScale(Math.min(i.scale() - numberOfTrailingZero, DISPLAY_SCALE), RoundingMode.FLOOR)
             .toPlainString();
     }
 
@@ -47,16 +43,20 @@ public class CalculatorApp {
 
         String[] tokens = line.split(" ");
         int pos = 1;
-        TransactionResult commandResult = null;
+        CommandResult commandResult = null;
+
         for (int i = 0; i < tokens.length; i++) {
-            TransactionCommand transactionCommand = TransactionCommand.builder().token(tokens[i]).pos(pos).calculator(calculator).build();
-            CalculatorCommandHandler command = CalculatorCommandHandlerFactory.create(transactionCommand);
+            TransactionCommand transactionCommand = TransactionCommand.builder().token(tokens[i]).pos(pos)
+                .calculator(calculator).build();
             try {
-                commandResult = transactionCommandExecutor.doTransaction(command, transactionCommand);
+                commandResult = transactionCommandExecutor.doExecute(transactionCommand);
+                pos += tokens[i].length() + 1;
             } catch (InsufficientParameterException e) {
                 return String.format("%s\n%s", e.getMessage(), printStack(e.getStack()));
+            } catch (Exception e) {
+                return String.format("wrong input token:%s at position:%d", transactionCommand.getToken(),
+                    transactionCommand.getPos());
             }
-            pos += tokens[i].length() + 1;
         }
 
         return printStack(commandResult.getTransaction().getValuesSnapshot());

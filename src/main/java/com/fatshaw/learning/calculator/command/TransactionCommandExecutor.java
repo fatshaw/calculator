@@ -1,7 +1,5 @@
 package com.fatshaw.learning.calculator.command;
 
-import com.fatshaw.learning.calculator.domain.TransactionCommand;
-import com.fatshaw.learning.calculator.domain.TransactionResult;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Builder;
@@ -12,8 +10,10 @@ public class TransactionCommandExecutor {
 
     List<CommandTransaction> transactions = new ArrayList<>();
 
-    public TransactionResult doTransaction(CalculatorCommandHandler command, TransactionCommand transactionCommand) {
-        TransactionResult transactionResult = command.doCommand(transactionCommand);
+    public CommandResult doExecute(TransactionCommand transactionCommand) {
+
+        CalculatorCommandHandler commandHandler = CalculatorCommandHandlerFactory.create(transactionCommand);
+        CommandResult transactionResult = commandHandler.doCommand(transactionCommand);
         CommandTransaction transaction = CommandTransaction.builder().transactionCommand(transactionCommand)
             .transactionResult(transactionResult).build();
         transactions.add(transaction);
@@ -26,6 +26,6 @@ public class TransactionCommandExecutor {
     static class CommandTransaction {
 
         TransactionCommand transactionCommand;
-        TransactionResult transactionResult;
+        CommandResult transactionResult;
     }
 }

@@ -13,6 +13,12 @@ public class CalculatorAppTest {
     }
 
     @Test
+    public void input_1_k_should_return_error() {
+        CalculatorApp calculatorApp = new CalculatorApp();
+        assertEquals("wrong input token:k at position:3", calculatorApp.processLine("1 k"));
+    }
+
+    @Test
     public void input_0_1_divide_should_return_stack_0_1() {
         CalculatorApp calculatorApp = new CalculatorApp();
         assertEquals("stack: 0 1", calculatorApp.processLine("0 1 /"));
