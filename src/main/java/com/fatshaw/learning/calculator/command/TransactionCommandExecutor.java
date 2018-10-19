@@ -12,7 +12,7 @@ public class TransactionCommandExecutor {
 
     public CommandResult doExecute(TransactionCommand transactionCommand) {
 
-        CalculatorCommandHandler commandHandler = CalculatorCommandHandlerFactory.create(transactionCommand);
+        CalculatorCommandHandler commandHandler = CalculatorCommandHandlerFactory.create();
         CommandResult transactionResult = commandHandler.doCommand(transactionCommand);
         CommandTransaction transaction = CommandTransaction.builder().transactionCommand(transactionCommand)
             .transactionResult(transactionResult).build();

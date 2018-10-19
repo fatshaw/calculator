@@ -1,6 +1,6 @@
 package com.fatshaw.learning.calculator.command;
 
-import com.fatshaw.learning.calculator.domain.transaction.Transaction;
+import com.fatshaw.learning.calculator.domain.trade.Transaction;
 import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Getter;

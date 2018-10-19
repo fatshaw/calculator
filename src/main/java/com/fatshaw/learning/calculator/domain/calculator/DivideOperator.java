@@ -1,7 +1,7 @@
 package com.fatshaw.learning.calculator.domain.calculator;
 
-import com.fatshaw.learning.calculator.domain.transaction.Transaction;
-import com.fatshaw.learning.calculator.domain.transaction.TransactionContext;
+import com.fatshaw.learning.calculator.domain.trade.Transaction;
+import com.fatshaw.learning.calculator.domain.trade.TransactionContext;
 import com.fatshaw.learning.calculator.exception.InsufficientParameterException;
 import java.math.BigDecimal;
 import java.math.MathContext;

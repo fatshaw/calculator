@@ -1,24 +1,17 @@
 package com.fatshaw.learning.calculator.domain.calculator;
 
-import com.fatshaw.learning.calculator.domain.transaction.Trade;
-import com.fatshaw.learning.calculator.domain.transaction.Transaction;
-import com.fatshaw.learning.calculator.domain.transaction.TransactionContext;
-import com.fatshaw.learning.calculator.domain.transaction.TransactionOperator;
+import com.fatshaw.learning.calculator.domain.trade.Trade;
+import com.fatshaw.learning.calculator.domain.trade.Transaction;
+import com.fatshaw.learning.calculator.domain.trade.TransactionContext;
+import com.fatshaw.learning.calculator.domain.trade.TransactionOperator;
 import java.math.BigDecimal;
-import java.util.List;
 
 public class Calculator implements Trade<BigDecimal> {
 
-    private TransactionContext<BigDecimal> calculatorContext = new CalculatorContext();
 
     @Override
-    public List<BigDecimal> values() {
-        return calculatorContext.values();
+    public Transaction<BigDecimal> apply(TransactionOperator<BigDecimal> transactionOperator,
+        TransactionContext<BigDecimal> transactionContext) {
+        return transactionOperator.doTransaction(transactionContext);
     }
-
-    @Override
-    public Transaction<BigDecimal> apply(TransactionOperator<BigDecimal> transactionOperator) {
-        return transactionOperator.doTransaction(calculatorContext);
-    }
-
 }

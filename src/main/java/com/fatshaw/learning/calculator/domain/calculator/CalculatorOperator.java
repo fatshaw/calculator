@@ -1,8 +1,8 @@
 package com.fatshaw.learning.calculator.domain.calculator;
 
-import com.fatshaw.learning.calculator.domain.transaction.Transaction;
-import com.fatshaw.learning.calculator.domain.transaction.TransactionContext;
-import com.fatshaw.learning.calculator.domain.transaction.TransactionOperator;
+import com.fatshaw.learning.calculator.domain.trade.Transaction;
+import com.fatshaw.learning.calculator.domain.trade.TransactionContext;
+import com.fatshaw.learning.calculator.domain.trade.TransactionOperator;
 import java.math.BigDecimal;
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.fatshaw.learning.calculator.domain.transaction;
+package com.fatshaw.learning.calculator.domain.trade;
 
 import java.util.List;
 
@@ -31,12 +31,12 @@ public interface TransactionContext<T> {
     int transactionSize();
 
     /**
-     * return last transaction
+     * return last trade
      */
     Transaction<T> recall();
 
     /**
-     * save latest transaction
+     * save latest trade
      */
     void saveTransaction(Transaction<T> t);
 

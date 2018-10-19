@@ -1,4 +1,4 @@
-package com.fatshaw.learning.calculator.domain.transaction;
+package com.fatshaw.learning.calculator.domain.trade;
 
 public interface TransactionOperator<T> {
 

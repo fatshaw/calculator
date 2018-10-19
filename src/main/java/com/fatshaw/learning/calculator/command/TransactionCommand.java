@@ -1,6 +1,6 @@
 package com.fatshaw.learning.calculator.command;
 
-import com.fatshaw.learning.calculator.domain.transaction.Trade;
+import com.fatshaw.learning.calculator.domain.trade.TransactionContext;
 import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Builder
 public class TransactionCommand {
 
-    Trade<BigDecimal> calculator;
+    TransactionContext<BigDecimal> transactionContext;
     String token;
     int pos;
 }
