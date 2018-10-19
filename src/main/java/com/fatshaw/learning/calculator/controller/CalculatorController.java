@@ -17,14 +17,14 @@ public abstract class CalculatorController {
     public String processLine(String line) {
 
         String[] tokens = line.trim().split(" ");
-        int pos = 1;
+        int position = 1;
 
         for (int i = 0; i < tokens.length; i++) {
-            TransactionCommand transactionCommand = TransactionCommand.builder().token(tokens[i]).pos(pos)
+            TransactionCommand transactionCommand = TransactionCommand.builder().token(tokens[i]).position(position)
                 .transactionContext(transactionContext).build();
             try {
                 transactionCommandExecutor.doExecute(transactionCommand);
-                pos += tokens[i].length() + 1;
+                position += tokens[i].length() + 1;
             } catch (InsufficientParameterException e) {
                 return insufficientParameterExceptionMessage(transactionCommand);
             } catch (Exception e) {
@@ -36,12 +36,24 @@ public abstract class CalculatorController {
     }
 
 
+    /**
+     * process calculator
+     */
     public abstract void process();
 
+    /**
+     * display transaction context message
+     */
     protected abstract String transactionContextMessage();
 
+    /**
+     * display error message when insufficient parameter exception occur
+     */
     protected abstract String insufficientParameterExceptionMessage(TransactionCommand transactionCommand);
 
+    /**
+     * display default error exception message
+     */
     protected abstract String defaultExceptionMessage(TransactionCommand transactionCommand);
 
 }

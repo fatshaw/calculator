@@ -13,5 +13,5 @@ public class TransactionCommand {
 
     TransactionContext<BigDecimal> transactionContext;
     String token;
-    int pos;
+    int position;
 }

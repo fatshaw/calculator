@@ -45,13 +45,13 @@ public class ConsoleCalculatorController extends CalculatorController {
     @Override
     protected String insufficientParameterExceptionMessage(TransactionCommand transactionCommand) {
         return String.format("operator %s (position: %d): insufficient parameters\n%s", transactionCommand.getToken(),
-            transactionCommand.getPos(), transactionContextMessage());
+            transactionCommand.getPosition(), transactionContextMessage());
     }
 
     @Override
     protected String defaultExceptionMessage(TransactionCommand transactionCommand) {
         return String.format("wrong input token:%s at position:%d", transactionCommand.getToken(),
-            transactionCommand.getPos());
+            transactionCommand.getPosition());
     }
 
 }

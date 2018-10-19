@@ -6,7 +6,7 @@ import com.fatshaw.learning.calculator.controller.CalculatorController;
 import com.fatshaw.learning.calculator.controller.ConsoleCalculatorController;
 import org.junit.Test;
 
-public class CalculatorAppTest {
+public class CalculatorControllerTest {
 
     @Test
     public void input_1_1_1_should_return_stack_1_1_1() {
